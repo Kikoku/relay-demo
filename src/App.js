@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Relay from 'react-relay'
 import logo from './logo.svg';
 import './App.css';
 
@@ -18,4 +19,24 @@ class App extends Component {
   }
 }
 
-export default App;
+exports.Container = Relay.createContainer(App, {
+  fragments: {
+    user: () => Relay.QL`
+      fragment on User {
+        name
+      }
+    `
+  }
+})
+
+exports.queries = {
+  name: 'UserQuerie',
+  params: {},
+  queries: {
+    user: () => Relay.QL`
+      query {
+        user(id: "57e46ab23b34a33831823b84")
+      }
+    `
+  }
+}
