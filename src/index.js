@@ -1,9 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import Relay, {RootContainer} from 'react-relay';
+import {Container, queries} from './App';
 import './index.css';
 
+Relay.injectNetworkLayer(
+  new Relay.DefaultNetworkLayer('http://localhost:8080')
+)
+
 ReactDOM.render(
-  <App />,
+  <RootContainer
+    Component={Container}
+    route={queries}
+    onReadyStateChange={({error}) => { if (error) console.error(error) }}
+  />,
   document.getElementById('root')
 );
