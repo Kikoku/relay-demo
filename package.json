@@ -8,6 +8,11 @@
   "author": "Collin Delphia <candrew022@gmail.com> (http://github.com/kikoku)",
   "license": "Copyright 2016 Collin Delphia",
   "homepage": "https://github.com/kikoku/graphql-demo",
+  "graphql": {
+    "request": {
+      "url": "http://localhost:8080"
+    }
+  },
   "devDependencies": {
     "autoprefixer": "6.4.1",
     "babel-core": "6.14.0",
