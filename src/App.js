@@ -21,22 +21,33 @@ class App extends Component {
 
 exports.Container = Relay.createContainer(App, {
   fragments: {
-    user: () => Relay.QL`
-      fragment on User {
-        name
+    allusers: () => Relay.QL`
+      fragment on UsersConnection {
+        edges {
+          node {
+            name
+            friends(first: 1) {
+              edges {
+                node {
+                  name
+                }
+              }
+            }
+          }
+        }
       }
     `
   }
 })
 
 exports.queries = {
-  name: 'UserQuerie',
-  params: {},
+  name: 'AllUsersRoute',
   queries: {
-    user: () => Relay.QL`
+    allusers: () => Relay.QL`
       query {
-        user(id: "57e46ab23b34a33831823b84")
+        allusers
       }
     `
-  }
+  },
+  params: {}
 }
