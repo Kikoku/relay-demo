@@ -30,8 +30,7 @@ exports.Container = Relay.createContainer(App, {
       fragment on UsersConnection {
         edges {
           node {
-            id
-            name
+            ${UserContainer.getFragment('user')}
           }
         }
       }
