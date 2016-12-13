@@ -39,19 +39,3 @@ exports.Container = Relay.createContainer(App, {
     `
   }
 })
-
-exports.queries = (params) => ({
-  name: 'AllUsersRoute',
-  queries: {
-    allusers: () => Relay.QL`
-      query {
-        allusers(first: $first)
-      }
-    `
-  },
-  paramDefinitions: {
-    first: {required: true},
-    after: {required: false}
-  },
-  params: params
-})

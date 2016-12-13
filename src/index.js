@@ -14,6 +14,22 @@ Relay.injectNetworkLayer(
   })
 )
 
+let queries = (params) => ({
+  name: 'AllUsersRoute',
+  queries: {
+    allusers: () => Relay.QL`
+      query {
+        allusers(first: $first)
+      }
+    `
+  },
+  paramDefinitions: {
+    first: {required: true},
+    after: {required: false}
+  },
+  params: params
+})
+
 ReactDOM.render(
   <RootContainer
     Component={Container}
