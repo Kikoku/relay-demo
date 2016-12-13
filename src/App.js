@@ -3,8 +3,9 @@ import Relay from 'react-relay'
 import logo from './logo.svg';
 import './App.css';
 
-const App = ({allusers}) => {
-  return (
+import {UserContainer} from './UserContainer.js';
+
+const App = ({allusers}) => (
     <div className="App">
       <div className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
@@ -14,13 +15,14 @@ const App = ({allusers}) => {
         To get started, edit <code>src/App.js</code> and save to reload.
       </p>
       <ul>
-        {allusers.edges.map(user => (
-          <li key={user.node.id}>{user.node.name}</li>
+        {allusers.edges.map((edge) => (
+          <UserContainer
+            user={edge.node}
+          />
         ))}
       </ul>
     </div>
   )
-}
 
 exports.Container = Relay.createContainer(App, {
   fragments: {
