@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import Relay, {RootContainer} from 'react-relay';
-import {Container, queries} from './App';
+import Relay, { RootContainer} from 'react-relay';
+import { Container } from './App';
 import './index.css';
 
 Relay.injectNetworkLayer(
@@ -30,11 +30,42 @@ let queries = (params) => ({
   params: params
 })
 
+class RootApp extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      displayResults: 3
+    }
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
+  render() {
+    return (
+      <div>
+        <input
+          type="text"
+          placeholder={3}
+          name="displayResults"
+          onChange={this.handleChange}
+          value={this.state.displayResults}
+        />
+        <RootContainer
+          Component={Container}
+          route={queries({first: this.state.displayResults})}
+          onReadyStateChange={({error}) => { if (error) console.error(error) }}
+        />
+      </div>
+    )
+  }
+}
+
 ReactDOM.render(
-  <RootContainer
-    Component={Container}
-    route={queries({first: 3})}
-    onReadyStateChange={({error}) => { if (error) console.error(error) }}
-  />,
+  <RootApp />,
   document.getElementById('root')
 );
