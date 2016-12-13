@@ -17,6 +17,7 @@ const App = ({allusers}) => (
       <ul>
         {allusers.edges.map((edge) => (
           <UserContainer
+            cursor={edge.cursor}
             user={edge.node}
           />
         ))}
@@ -29,6 +30,7 @@ exports.Container = Relay.createContainer(App, {
     allusers: () => Relay.QL`
       fragment on UsersConnection {
         edges {
+          cursor
           node {
             ${UserContainer.getFragment('user')}
           }
