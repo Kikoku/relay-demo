@@ -17,9 +17,9 @@ Relay.injectNetworkLayer(
 let queries = (params) => ({
   name: 'AllUsersRoute',
   queries: {
-    allusers: () => Relay.QL`
+    users: () => Relay.QL`
       query {
-        allusers(first: $first)
+        users(first: $first)
       }
     `
   },

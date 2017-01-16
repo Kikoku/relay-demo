@@ -1,40 +1,41 @@
 import React from 'react';
 import Relay from 'react-relay'
-import logo from './logo.svg';
 import './App.css';
 
-import {UserContainer} from './UserContainer.js';
+import {UserContainer} from './UserContainer';
+import {AddUserContainer} from './AddUserContainer';
 
-const App = ({allusers}) => (
+const App = ({users, user}) => {
+  return (
     <div className="App">
-      <div className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h2>Welcome to React</h2>
-      </div>
-      <p className="App-intro">
-        To get started, edit <code>src/App.js</code> and save to reload.
-      </p>
       <ul>
-        {allusers.edges.map((edge) => (
+        {users.edges.map((edge) => (
           <UserContainer
             cursor={edge.cursor}
             user={edge.node}
           />
         ))}
       </ul>
+      <AddUserContainer user={user}/>
     </div>
-  )
+  )}
 
 exports.Container = Relay.createContainer(App, {
   fragments: {
-    allusers: () => Relay.QL`
-      fragment on UsersConnection {
+    users: () => Relay.QL`
+      fragment on UserConnection {
         edges {
           cursor
           node {
             ${UserContainer.getFragment('user')}
           }
         }
+      }
+
+    `,
+    user: () => Relay.QL`
+      fragment on User {
+        ${AddUserContainer.getFragment('user')}
       }
     `
   }
