@@ -1,18 +1,17 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Relay from 'react-relay';
-import './App.css';
 
-class App extends Component {
+class HomePage extends Component {
   render() {
     return (
       <div>
-        {this.props.children}
+        {this.props.viewer.name}
       </div>
     )
   }
 }
 
-export default Relay.createContainer(App, {
+export default Relay.createContainer(HomePage, {
   fragments: {
     viewer: () => Relay.QL`
       fragment on Viewer {
