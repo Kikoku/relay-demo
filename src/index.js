@@ -7,7 +7,6 @@ import {
   browserHistory
 } from 'react-router';
 import useRelay from 'react-router-relay';
-import './index.css';
 import Routes from './routes';
 
 localStorage.setItem('access_token', 'test')
