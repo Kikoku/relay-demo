@@ -9,8 +9,6 @@ import {
 import useRelay from 'react-router-relay';
 import Routes from './routes';
 
-localStorage.setItem('access_token', 'test')
-
 Relay.injectNetworkLayer(
   new Relay.DefaultNetworkLayer('http://localhost:8080', {
     get headers() {

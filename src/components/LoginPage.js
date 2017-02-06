@@ -27,7 +27,8 @@ class LoginPage extends Component {
           console.log('oops');
         },
         onSuccess: (response) => {
-          console.log(response.generateToken.token);
+          localStorage.setItem('access_token', response.generateToken.token)
+          location.reload()
         }
       }
     )
