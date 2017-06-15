@@ -1,11 +1,19 @@
 import React from 'react';
+import {
+  createFragmentContainer,
+  graphql,
+} from 'react-relay'
 
-const TodoItem = ({text, complete}) => (
-  <li
-    style={{
-      opacity: complete ? .65 : 1
-    }}
-    >{text}</li>
+const TodoItem = ({todo}) => (
+  <li>{todo.text}</li>
 )
 
-export default TodoItem;
+module.exports = createFragmentContainer(
+  TodoItem,
+  graphql`
+    fragment TodoItem_todo on Todo {
+      id
+      text
+    }
+  `
+)

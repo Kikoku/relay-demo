@@ -11,7 +11,7 @@ import {
   QueryRenderer,
   graphql
 } from 'react-relay';
-import TodoList from './components/TodoList';
+import TodoApp from './components/TodoApp';
 
 function fetchQuery (
   operation,
@@ -42,35 +42,23 @@ class App extends Component {
       <QueryRenderer
         environment={modernEnvironment}
         query={graphql`
-          query App_Query {
+          query AppQuery {
             viewer {
               name
-              todos(
-                first: 2147483647  # max GraphQLInt
-              ) {
-                edges {
-                  node {
-                    id,
-                    text
-                  }
-                }
-              }
+              ...TodoApp_viewer
             }
           }
         `}
         variables={{}}
         render={({error, props}) => {
           if(props) {
-            console.log(props);
             return (
               <div className="App">
                 <div className="App-header">
                   <img src={logo} className="App-logo" alt="logo" />
                   <h2>Welcome {props.viewer.name}</h2>
                 </div>
-                <TodoList
-                  todos={props.viewer.todos}
-                />
+                <TodoApp viewer={props.viewer}/>
               </div>
             )
           } else {
