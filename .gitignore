@@ -13,3 +13,5 @@ build
 .DS_Store
 .env
 npm-debug.log
+src/components/__generated__/*.js
+src/__generated__/*.js
